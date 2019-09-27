@@ -1,6 +1,6 @@
 ---
 title: "Practice importing and plotting"
-author: "struggling student"
+author: "Dr K as Student"
 date: "9/24/2019"
 output: html_document
 ---
@@ -23,6 +23,7 @@ Import both csv files into your global environment
 ```{r}
 plantExp <- read.csv(file="plantExperiment.csv")
 boxplot(weight~group,data=plantExp)
+
 ```
 looks like trt2 is the heaviest plants
 
@@ -40,5 +41,10 @@ t.test(weight~group, data=reducd)
 ```{r}
 Movies4 <- read.csv(file="fourMovies.csv",header=TRUE) %>% select(-X)
 boxplot(Movies4)
+# or using ggplot
+ggplot(stack(Movies4), aes(x = ind, y = values)) +
+ geom_boxplot()
+#now t-tests
 with(Movies4,t.test(crzRchAz,scream3))
+with(Movies4,t.test(dthNat,scream3))
 ```
