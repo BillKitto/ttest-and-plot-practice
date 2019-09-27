@@ -1,0 +1,44 @@
+---
+title: "Practice importing and plotting"
+author: "struggling student"
+date: "9/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(tidyverse)
+require(tigerstats)
+```
+
+## Your challenge  
+
+Import both csv files into your global environment
+
+
+
+
+## Create Box Plots of weights from the plant experiment
+
+```{r}
+plantExp <- read.csv(file="plantExperiment.csv")
+boxplot(weight~group,data=plantExp)
+```
+looks like trt2 is the heaviest plants
+
+## Is there a difference in plant weight between treatment1 and treatment2?  Use a t.test
+
+```{r}
+reducd <- select(plantExp,-X) %>% filter(group != "ctrl") %>% droplevels()
+t.test(weight~group, data=reducd)
+```
+
+
+## look at a boxplot of the fourMovies.csv.  Which movie got the highest rating?  Which received the lowest?
+
+
+```{r}
+Movies4 <- read.csv(file="fourMovies.csv",header=TRUE) %>% select(-X)
+boxplot(Movies4)
+with(Movies4,t.test(crzRchAz,scream3))
+```
